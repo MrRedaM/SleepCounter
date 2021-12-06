@@ -1,8 +1,47 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://res/fonts/montserat_bold.tres" type="DynamicFont" id=1]
 [ext_resource path="res://res/fonts/montserat.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Counter.gd" type="Script" id=3]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 0.88
+glow_strength = 0.9
+glow_high_quality = true
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("WorldEnvironment:environment:glow_intensity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.88 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "glow"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WorldEnvironment:environment:glow_intensity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 3.5 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ 0.2, 1.0, 0.2 ]
+}
 
 [node name="Counter" type="Control"]
 anchor_right = 1.0
@@ -32,7 +71,7 @@ margin_left = 323.0
 margin_right = 559.0
 margin_bottom = 489.0
 size_flags_vertical = 8
-custom_colors/font_color = Color( 0.941176, 0.352941, 0.352941, 1 )
+custom_colors/font_color = Color( 2, 0.35, 0.35, 1 )
 custom_fonts/font = ExtResource( 1 )
 text = "2"
 valign = 2
@@ -56,6 +95,14 @@ text = "with normal sleep :)"
 align = 1
 
 [node name="RefreshTimer" type="Timer" parent="."]
+wait_time = 2.0
 autostart = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/glow = SubResource( 3 )
 
 [connection signal="timeout" from="RefreshTimer" to="." method="_on_RefreshTimer_timeout"]
