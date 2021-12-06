@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://res/fonts/montserat_bold.tres" type="DynamicFont" id=1]
+[ext_resource path="res://res/fonts/montserat.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Counter.gd" type="Script" id=3]
+
+[node name="Counter" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 64
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 634.0
+margin_right = 1080.0
+margin_bottom = 1123.0
+alignment = 1
+
+[node name="DaysCount" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_left = 323.0
+margin_right = 559.0
+margin_bottom = 489.0
+size_flags_vertical = 8
+custom_colors/font_color = Color( 0.941176, 0.352941, 0.352941, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "2"
+valign = 2
+
+[node name="DaysText" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_left = 563.0
+margin_top = 390.0
+margin_right = 757.0
+margin_bottom = 489.0
+size_flags_vertical = 8
+custom_fonts/font = ExtResource( 2 )
+text = "days"
+valign = 2
+
+[node name="Description" type="Label" parent="VBoxContainer"]
+margin_top = 1187.0
+margin_right = 1080.0
+margin_bottom = 1286.0
+custom_fonts/font = ExtResource( 2 )
+text = "with normal sleep :)"
+align = 1
+
+[node name="RefreshTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="RefreshTimer" to="." method="_on_RefreshTimer_timeout"]
