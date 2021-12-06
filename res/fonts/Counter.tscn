@@ -7,7 +7,7 @@
 [sub_resource type="Environment" id=1]
 background_mode = 4
 glow_enabled = true
-glow_intensity = 0.2
+glow_intensity = 0.8185
 glow_strength = 0.9
 glow_high_quality = true
 
@@ -102,4 +102,8 @@ reset_on_save = false
 anims/RESET = SubResource( 2 )
 anims/glow = SubResource( 3 )
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[node name="RefreshTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="RefreshTimer" to="." method="_on_RefreshTimer_timeout"]

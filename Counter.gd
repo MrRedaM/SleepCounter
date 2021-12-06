@@ -18,5 +18,6 @@ func update_counter():
 		var current_date = OS.get_unix_time_from_datetime(OS.get_datetime())
 		_counter_label.text = str((current_date - date) / 60 / 60 / 24)
 
-func _on_AnimationPlayer_animation_finished(anim_name):
+
+func _on_RefreshTimer_timeout():
 	update_counter()
